@@ -1,6 +1,9 @@
+; rename to μtiny
 (ns oneup.core
   (:require [clj-di.core :as di :include-macros true]
             [goog.webgl :as webgl]))
+
+(def code-page-437 [])
 
 (defn compile-shader [src type]
   (let [gl (di/get-dep :gl)
@@ -58,7 +61,8 @@ void main() {
       (.bufferData gl webgl/ARRAY_BUFFER (js/Float32Array. [-1.0, -1.0, 1.0, -1.0, -1.0, 1.0, -1.0, 1.0, 1.0, -1.0, 1.0, 1.0]) webgl/STATIC_DRAW)
       (.enableVertexAttribArray gl pos-loc)
       (.vertexAttribPointer gl pos-loc 2 webgl/FLOAT false 0 0)
-      pos-loc)
+      ;pos-loc
+      )
     (letfn [(render [time]
               (do
                 (.viewport gl 0 0 width height)
@@ -77,6 +81,10 @@ void main() {
 (defn ^:export bootstrap [el]
   (let [gl (doto
              (or (.getContext el "webgl") (.getContext el "experimental-webgl"))
-             (.getExtension "OES_texture_half_float"))]
-    (di/register! :gl gl)
+             (.getExtension "OES_texture_half_float"))
+        ]
+    (do
+      (bind-input-handlers))
+    (di/register! :gl gl
+                  :input inputState)
     (app)))

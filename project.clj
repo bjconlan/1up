@@ -2,14 +2,12 @@
   :jvm-opts ^:replace ["-Xms512m" "-Xmx512m" "-server"]
   :dependencies [[org.clojure/clojure "1.9.0-alpha10"]
                  [org.clojure/clojurescript "1.9.93"]
-                 ;[org.omcljs/om "1.0.0-alpha40"]
-                 ;[sablono "0.7.2"]
-                 ;[clj-di "0.5.0"]
-                 ]
+                 [clj-di "0.5.0"]]
   :profiles {:dev {:plugins [[lein-cljsbuild "1.1.3"]]
                    :dependencies [[figwheel-sidecar "0.5.4-7"]]}}
   :clean-targets [:target-path "out"]
-  :cljsbuild {:builds [{:source-paths ["src"]
+  :cljsbuild {:builds [{:id           "dev"
+                        :source-paths ["src"]
                         :figwheel     true
                         :compiler     {:main       "oneup.core"
                                        :asset-path "js/out"
