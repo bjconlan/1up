@@ -1,10 +1,10 @@
 (defproject oneup "0.0.1-SNAPSHOT"
   :jvm-opts ^:replace ["-Xms512m" "-Xmx512m" "-server"]
-  :dependencies [[org.clojure/clojure "1.9.0-alpha10"]
-                 [org.clojure/clojurescript "1.9.93"]
+  :dependencies [[org.clojure/clojure "1.9.0-alpha14"]
+                 [org.clojure/clojurescript "1.9.293"]
                  [clj-di "0.5.0"]]
-  :profiles {:dev {:plugins [[lein-cljsbuild "1.1.3"]]
-                   :dependencies [[figwheel-sidecar "0.5.4-7"]]}}
+  :profiles {:dev {:plugins [[lein-cljsbuild "1.1.5"]]
+                   :dependencies [[figwheel-sidecar "0.5.8"]]}}
   :clean-targets [:target-path "out"]
   :cljsbuild {:builds [{:id           "dev"
                         :source-paths ["src"]
@@ -14,12 +14,12 @@
                                        :output-dir "resources/public/js/out"
                                        :output-to  "resources/public/js/main.js"
                                        :source-map true}}
-                        {:id           "prod"
-                         :source-paths ["src"]
-                         :compiler     {:optimizations :advanced
-                                        :pretty-print  false
-                                        :main       "oneup.core"
-                                        :asset-path "out"
-                                        :output-dir "target/out"
-                                        :output-to  "target/main.min.js"
-                                        :source-map "target/main.min.js.map"}}]})
+                       {:id           "prod"
+                        :source-paths ["src"]
+                        :compiler     {:optimizations :advanced
+                                       :pretty-print  false
+                                       :main          "oneup.core"
+                                       :asset-path    "out"
+                                       :output-dir    "target/out"
+                                       :output-to     "target/main.min.js"
+                                       :source-map    "target/main.min.js.map"}}]})

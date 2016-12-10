@@ -83,8 +83,9 @@ void main() {
              (or (.getContext el "webgl") (.getContext el "experimental-webgl"))
              (.getExtension "OES_texture_half_float"))
         ]
-    (do
+    #_(do
       (bind-input-handlers))
     (di/register! :gl gl
-                  :input inputState)
+                  ;:input inputState
+                  )
     (app)))
